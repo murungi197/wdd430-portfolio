@@ -1,26 +1,12 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import ProjectList from "@/components/ProjectList";
+import { getProjects } from "@/lib/projects-db";
 
-const projects = [
-  {
-    number: "01",
-    title: "Movie Planner",
-    description:
-      "Search for movies and save their trailers to a favorites list for later.",
-    technologies: ["JavaScript", "Node.js", "TypeScript", "Vite", "Cloud database"],
-    link: "https://movie-planner-wdd330-final.netlify.app/",
-    artwork: "planner" as const,
-  },
-  {
-    number: "02",
-    title: "DevTrack",
-    description:
-      "A project manager for organizing projects, tracking progress, filtering by status or technology, and managing skills. Project data is saved in browser storage.",
-    technologies: ["TypeScript", "Vite", "Node.js", "Browser local storage"],
-    link: "https://sunny-faloodeh-3fda7f.netlify.app",
-    artwork: "portfolio" as const,
-  },
-];
+async function Projects() {
+  const projects = await getProjects();
+  return <ProjectList projects={projects} />;
+}
 
 export default function Home() {
   return (
@@ -54,7 +40,15 @@ export default function Home() {
         </div>
       </section>
 
-      <ProjectList projects={projects} />
+      <Suspense
+        fallback={
+          <p className="page-width" role="status">
+            Loading projects…
+          </p>
+        }
+      >
+        <Projects />
+      </Suspense>
 
       <section className="contact-band page-width" aria-labelledby="contact-title">
         <div>

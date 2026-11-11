@@ -1,8 +1,8 @@
 import ProjectCard from "@/components/ProjectCard";
-import type { ProjectCardProps } from "@/components/ProjectCard";
+import type { Project } from "@/lib/projects-db";
 
 interface ProjectListProps {
-  projects: ProjectCardProps[];
+  projects: Project[];
 }
 
 export default function ProjectList({ projects }: ProjectListProps) {
@@ -24,8 +24,16 @@ export default function ProjectList({ projects }: ProjectListProps) {
           </p>
         </div>
         <div className="project-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} {...project} />
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              title={project.title}
+              description={project.description}
+              technologies={project.technologies}
+              link={project.link}
+              number={String(index + 1).padStart(2, "0")}
+              artwork={index === 0 ? "planner" : "portfolio"}
+            />
           ))}
         </div>
       </div>

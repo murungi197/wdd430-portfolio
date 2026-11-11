@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header className="border-b border-[#e2e8e2] bg-[#f7f8f6]">
       <div className="mx-auto flex min-h-[76px] w-full max-w-[1120px] items-center justify-between px-6">
-        <Link className="brand" href="/" aria-label="Murungi Innocent">
+        <Link className="brand name" href="/" aria-label="Murungi Innocent">
           <span className="brand-mark" aria-hidden="true">
             MI
           </span>
