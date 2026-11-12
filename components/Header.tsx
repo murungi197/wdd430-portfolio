@@ -11,12 +11,18 @@ export default function Header() {
           <span>MURUNGI INNOCENT</span>
         </Link>
         <nav aria-label="Main navigation">
-          <ul className="flex items-center gap-6 text-[13px] font-semibold text-[#64736a]">
+          <ul className="flex items-center gap-2 text-[11px] font-semibold text-[#64736a] sm:gap-4 sm:text-[13px]">
             <li>
               <Link href="/">Home</Link>
             </li>
             <li>
               <Link href="/about">About</Link>
+            </li>
+            <li>
+              <Link href="/open-source">Open source</Link>
+            </li>
+            <li>
+              <Link href="/school-projects">School</Link>
             </li>
           </ul>
         </nav>

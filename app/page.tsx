@@ -1,14 +1,14 @@
-import { Suspense } from "react";
 import Link from "next/link";
+import { connection } from "next/server";
 import ProjectList from "@/components/ProjectList";
 import { getProjects } from "@/lib/projects-db";
 
-async function Projects() {
-  const projects = await getProjects();
-  return <ProjectList projects={projects} />;
-}
+export const instant = false;
 
-export default function Home() {
+export default async function Home() {
+  await connection();
+  const projects = await getProjects();
+
   return (
     <main>
       <section className="hero page-width" aria-labelledby="intro-title">
@@ -40,15 +40,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Suspense
-        fallback={
-          <p className="page-width" role="status">
-            Loading projects…
-          </p>
-        }
-      >
-        <Projects />
-      </Suspense>
+      <ProjectList projects={projects} />
 
       <section className="contact-band page-width" aria-labelledby="contact-title">
         <div>
