@@ -1,4 +1,23 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+
+function AuthControls() {
+  return (
+    <Show when="signed-out">
+      <SignInButton mode="modal" />
+      <SignUpButton mode="modal" />
+    </Show>
+  );
+}
+
+function SignedInControls() {
+  return (
+    <Show when="signed-in">
+      <UserButton />
+    </Show>
+  );
+}
 
 export default function Header() {
   return (
@@ -26,6 +45,12 @@ export default function Header() {
             </li>
             <li>
               <Link href="/school-projects">School</Link>
+            </li>
+            <li>
+              <Suspense>
+                <AuthControls />
+                <SignedInControls />
+              </Suspense>
             </li>
           </ul>
         </nav>
